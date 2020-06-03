@@ -180,6 +180,7 @@ export class RingBufferDriver {
 
   /**
    * Tests a ring buffer implementation.
+   * @param {Number} capacity - capacity value to test ring buffers with.
    * @param {Function} ringBufferFactory - given 'capacity', returns a ring buffer instance to test
    * @returns {Array} - returns a pair of test results. The first element is the 'actual' result, and
    * the second element is the 'expected' result. If both values are the same, the test passes. If they

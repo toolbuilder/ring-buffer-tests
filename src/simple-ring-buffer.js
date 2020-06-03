@@ -1,7 +1,8 @@
 /**
  * Simple ring buffer implementation.
  *
- * The primary methods match the Array signature for push, pop, unshift, and shift.
+ * The primary methods match the Array signature for push, pop, unshift, and shift. But
+ * of course push and unshift implement ring buffer semantics, not Array semantics.
  *
  * For buffer operation either use push/shift together, or unshift/pop together.
  *
@@ -11,14 +12,12 @@
  */
 export class SimpleRingBuffer {
   /**
-   * Creates a ring buffer.
+   * Creates a ring buffer. This constructor is not considered part of the ringbuffer
+   * interface, and is not tested by RingBufferDriver.
    * @param {Number} capacity - the maximum number of items the ring buffer can hold.
    * The capacity is accessible as the 'capacity' property on the ring buffer.
    */
-  constructor (capacity) {
-    this.array = []
-    this.capacity = capacity
-  }
+  constructor (capacity) { this.array = []; this.capacity = capacity }
 
   /**
    * Get the number of items currently in the buffer.
