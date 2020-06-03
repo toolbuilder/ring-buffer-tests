@@ -29,6 +29,7 @@ export class SimpleRingBuffer {
    * Pushes a value onto the back of the buffer. If length === capacity,
    * the value at the front of the buffer is discarded.
    * @param {any} value - value to push
+   * @returns {Number} - current length of buffer
    */
   push (x) { if (this.length === this.capacity) this.shift(); return this.array.push(x) }
 
@@ -54,6 +55,7 @@ export class SimpleRingBuffer {
    * Pushes a value on the front of the buffer. If length === capacity,
    * the value at the back is discarded.
    * @param {any} value - to push onto the front
+   * @returns {Number} - current length of buffer
    */
   unshift (x) { if (this.length === this.capacity) this.pop(); return this.array.unshift(x) }
 
