@@ -2,7 +2,7 @@
 
 This is a simple test harness for testing ring buffers (aka circular queues). Multiple ring buffer implementations are required to support different optimization requirements, so this package provides testing for the core functionality.
 
-The interface being tested is defined by [SimpleRingBuffer](src/simple-ring-buffer.js).
+The interface being tested is defined by [SimpleRingBuffer](https://github.com/toolbuilder/ring-buffer-tests/blob/master/src/simple-ring-buffer.js).
 
 ## Installation
 

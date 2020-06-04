@@ -1,7 +1,7 @@
 {
   "name": "@toolbuilder/ring-buffer-tests",
   "description": "Simple test harness for testing ring buffer implementations",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [],
   "license": "MIT",
   "main": "index.js",
