@@ -88,13 +88,12 @@ class Dual {
 // Test that the addName method can be used to grow
 // the buffer to capacity. Randomly, remove a value
 // so that growth is interleaved with shrinking
-const makeGrowingTest = (addName, removeName) => {
+const makeGrowingTest = (addName, removeName, data) => {
   return (exemplar, dual) => {
-    let value = 0
-    dual[addName](value++)
+    dual[addName](data.next())
     dual[removeName]()
     while (exemplar.length < exemplar.capacity) {
-      dual[addName](value++)
+      dual[addName](data.next())
       if (Math.random() > 0.3) dual[removeName]()
     }
   }
@@ -102,11 +101,10 @@ const makeGrowingTest = (addName, removeName) => {
 
 // Run buffer up to capacity and keep it there for
 // a while to make sure that values are dropped properly
-const makeTestAtCapacity = (addName, removeName) => {
+const makeTestAtCapacity = (addName, removeName, data) => {
   return (exemplar, dual) => {
-    let value = 0
     for (let i = 0; i < 2 * exemplar.capacity; ++i) {
-      dual[addName](value++)
+      dual[addName](data.next())
     }
   }
 }
@@ -114,15 +112,14 @@ const makeTestAtCapacity = (addName, removeName) => {
 // Run buffer up to capacity, and then shrink back to
 // zero length, but occassionaly add a value so that
 // shrinking is interleaved with growth.
-const makeShrinkingTest = (addName, removeName) => {
+const makeShrinkingTest = (addName, removeName, data) => {
   return (exemplar, dual) => {
-    let value = 0
     while (exemplar.length < exemplar.capacity) {
-      dual[addName](value++)
+      dual[addName](data.next())
     }
     while (exemplar.length > 0) {
       dual[removeName]()
-      if (Math.random() > 0.7) dual[addName](value++)
+      if (Math.random() > 0.7) dual[addName](data.next())
     }
   }
 }
@@ -145,11 +142,11 @@ const testHarness = (capacity, factories, testFunction) => {
 }
 
 // Combine multiple tests together for a given set of method names (e.g. 'push', 'shift')
-export const runTest = (capacity, factories, methods) => {
+export const runTest = (capacity, factories, methods, dataGenerator) => {
   const testFunctionFactories = [makeGrowingTest, makeTestAtCapacity, makeShrinkingTest]
   return testFunctionFactories
     .map(testFunctionFactory => {
-      return testHarness(capacity, factories, testFunctionFactory(...methods))
+      return testHarness(capacity, factories, testFunctionFactory(...methods, dataGenerator()))
     })
     .reduce((finalResult, result) => dequal(finalResult, [true, true]) ? result : finalResult, [true, true])
 }
@@ -157,7 +154,14 @@ export const runTest = (capacity, factories, methods) => {
 const defaultOptions = {
   exemplarFactory: (capacity) => new SimpleRingBuffer(capacity),
   getState: getBufferState,
-  methodPairs: [['push', 'shift'], ['unshift', 'pop']]
+  methodPairs: [['push', 'shift'], ['unshift', 'pop']],
+  dataGenerator: () => {
+    const randomData = chainable.range(1000).map(n => Math.random()).toArray()
+    const sequence = chainable.repeatIterable(Number.MAX_SAFE_INTEGER, randomData)[Symbol.iterator]()
+    return {
+      next () { return sequence.next().value }
+    }
+  }
 }
 
 /**
@@ -190,7 +194,7 @@ export class RingBufferDriver {
   testRingBuffer (capacity, ringBufferFactory) {
     const factories = [ringBufferFactory, this.options.exemplarFactory]
     return this.options.methodPairs
-      .map(methodPair => runTest(capacity, factories, methodPair))
+      .map(methodPair => runTest(capacity, factories, methodPair, this.options.dataGenerator))
       .reduce((finalResult, result) => dequal(finalResult, [true, true]) ? result : finalResult, [true, true])
   }
 }
