@@ -49,6 +49,7 @@ The class that runs the tests.
   * options.exemplarFactory - factory function, fn(capacity), for exemplar ring buffer. Defaults to SimpleRingBuffer.
   * options.getState - method to get state from both ring buffers, returns a simple Object with the field values you want to check. Defaults keys are: `capacity`, `length`, `front`, `back`, `contents` which uses the iterator to collect all buffer values.
   * options.methodPairs - method name pairs for grow/shrink operations. Defaults to `[['push', 'shift'], ['unshift', 'pop']]`. Other method names are not currently supported.
+  * options.dataGenerator - a function that takes no parameters that returns a function that returns a data element to insert into the test buffer. The default dataGenerator repeats a sequence of 1000 random numbers forever.
 
 #### testRingBuffer
 

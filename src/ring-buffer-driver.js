@@ -1,4 +1,4 @@
-import dequal from 'dequal'
+import { dequal } from 'dequal'
 import { chainable } from 'iterablefu'
 import { SimpleRingBuffer } from './simple-ring-buffer'
 
@@ -90,10 +90,10 @@ class Dual {
 // so that growth is interleaved with shrinking
 const makeGrowingTest = (addName, removeName, data) => {
   return (exemplar, dual) => {
-    dual[addName](data.next())
+    dual[addName](data())
     dual[removeName]()
     while (exemplar.length < exemplar.capacity) {
-      dual[addName](data.next())
+      dual[addName](data())
       if (Math.random() > 0.3) dual[removeName]()
     }
   }
@@ -104,7 +104,7 @@ const makeGrowingTest = (addName, removeName, data) => {
 const makeTestAtCapacity = (addName, removeName, data) => {
   return (exemplar, dual) => {
     for (let i = 0; i < 2 * exemplar.capacity; ++i) {
-      dual[addName](data.next())
+      dual[addName](data())
     }
   }
 }
@@ -115,11 +115,11 @@ const makeTestAtCapacity = (addName, removeName, data) => {
 const makeShrinkingTest = (addName, removeName, data) => {
   return (exemplar, dual) => {
     while (exemplar.length < exemplar.capacity) {
-      dual[addName](data.next())
+      dual[addName](data())
     }
     while (exemplar.length > 0) {
       dual[removeName]()
-      if (Math.random() > 0.7) dual[addName](data.next())
+      if (Math.random() > 0.7) dual[addName](data())
     }
   }
 }
@@ -158,9 +158,7 @@ const defaultOptions = {
   dataGenerator: () => {
     const randomData = chainable.range(1000).map(n => Math.random()).toArray()
     const sequence = chainable.repeatIterable(Number.MAX_SAFE_INTEGER, randomData)[Symbol.iterator]()
-    return {
-      next () { return sequence.next().value }
-    }
+    return () => sequence.next().value
   }
 }
 
