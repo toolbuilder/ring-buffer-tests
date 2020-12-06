@@ -151,7 +151,7 @@ export const runTest = (capacity, factories, methods, dataGenerator) => {
     .reduce((finalResult, result) => dequal(finalResult, [true, true]) ? result : finalResult, [true, true])
 }
 
-const defaultOptions = {
+export const defaultOptions = {
   exemplarFactory: (capacity) => new SimpleRingBuffer(capacity),
   getState: getBufferState,
   methodPairs: [['push', 'shift'], ['unshift', 'pop']],

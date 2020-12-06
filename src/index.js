@@ -1,2 +1,2 @@
 export { SimpleRingBuffer } from './simple-ring-buffer'
-export { RingBufferDriver, getBufferState } from './ring-buffer-driver'
+export { RingBufferDriver, getBufferState, defaultOptions } from './ring-buffer-driver'
