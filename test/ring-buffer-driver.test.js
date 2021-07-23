@@ -1,4 +1,4 @@
-import { RingBufferDriver, SimpleRingBuffer } from '../src/index'
+import { RingBufferDriver, SimpleRingBuffer } from '../src/index.js'
 import { test } from 'zora'
 
 // This tests are very incomplete, but sufficient for my immediate purposes

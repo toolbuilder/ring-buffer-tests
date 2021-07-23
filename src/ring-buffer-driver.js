@@ -1,6 +1,6 @@
 import { dequal } from 'dequal'
 import { chainable } from 'iterablefu'
-import { SimpleRingBuffer } from './simple-ring-buffer'
+import { SimpleRingBuffer } from './simple-ring-buffer.js'
 
 export const getBufferState = (ringbuffer) => {
   return {
