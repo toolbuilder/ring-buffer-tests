@@ -1,6 +1,6 @@
 {
   "name": "@toolbuilder/ring-buffer-tests",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Simple test harness for testing ring buffer implementations.",
   "keywords": [],
   "homepage": "https://github.com/toolbuilder/ring-buffer-tests#readme",
