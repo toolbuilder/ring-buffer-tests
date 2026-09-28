@@ -1,5 +1,6 @@
 import { RingBufferDriver, SimpleRingBuffer } from '../src/index.js'
-import { test } from 'zora'
+import test from 'node:test'
+import assert from 'node:assert/strict'
 
 // This tests are very incomplete, but sufficient for my immediate purposes
 
@@ -18,14 +19,14 @@ export class MinimalRingBuffer extends Array {
   back () { return this[this.length - 1] }
 }
 
-test('passing ring buffer', assert => {
+test('passing ring buffer', () => {
   const driver = new RingBufferDriver()
   const factory = (capacity) => new MinimalRingBuffer(capacity)
   const [actual, expected] = driver.testRingBuffer(100, factory)
   assert.deepEqual(actual, expected, 'ring buffer passed test')
 })
 
-test('changing exemplar factory', assert => {
+test('changing exemplar factory', () => {
   const exemplarFactory = (capacity) => new SimpleRingBuffer(capacity)
   const driver = new RingBufferDriver({ exemplarFactory })
   const factory = (capacity) => new MinimalRingBuffer(capacity)
@@ -46,7 +47,7 @@ class NonRingBuffer1 extends Array {
   back () { return this[this.length - 1] }
 }
 
-test('failing ring buffer ', assert => {
+test('failing ring buffer', () => {
   const driver = new RingBufferDriver()
   const factory = (capacity) => new NonRingBuffer1(capacity)
   const [actual, expected] = driver.testRingBuffer(100, factory)

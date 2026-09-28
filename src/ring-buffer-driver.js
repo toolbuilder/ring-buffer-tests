@@ -171,10 +171,11 @@ export const defaultOptions = {
 export class RingBufferDriver {
   /**
    *
-   * @param {Object} options - has the following properties:
-   * @param {RingBuffer} options.exemplarFactory - factory function, fn(capacity), for comparison ring buffer,
-   * @param {Function} options.getState - method to get state from both ring buffers
-   * @param {Array} options.methodPairs - method name pairs for grow/shrink operations (e.g. ['push', 'shift'])
+   * @param {Object} [options] - has the following properties:
+   * @param {Function} [options.exemplarFactory] - factory function, fn(capacity), for comparison ring buffer
+   * @param {Function} [options.getState] - method to get state from both ring buffers
+   * @param {Array} [options.methodPairs] - method name pairs for grow/shrink operations (e.g. ['push', 'shift'])
+   * @param {Function} [options.dataGenerator] - data generator function
    */
   constructor (options = {}) {
     this.options = { ...defaultOptions, ...options }

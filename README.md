@@ -13,11 +13,12 @@ npm install --save @toolbuilder/ring-buffer-tests
 ## Use
 
 ```javascript
+import test from 'node:test'
+import assert from 'node:assert/strict'
 import { RingBufferDriver } from '@toolbuilder/ring-buffer-tests'
-import { test } from 'zora' // or use your favorite test suite
-import { YourRingBuffer } from '../src/your-ring-buffer'
+import { YourRingBuffer } from '../src/your-ring-buffer.js'
 
-test('ring buffer interface test', assert => {
+test('ring buffer interface test', () => {
   const driver = new RingBufferDriver() // taking default options
 
   // Since the driver does not test the ctor, you need to provide a factory function
@@ -29,7 +30,7 @@ test('ring buffer interface test', assert => {
   // If the test fails, the 'actual' field will hold what YourRingBuffer provided.
   // And the 'expected' field will hold what the exemplar (SimpleRingBuffer) provided.
   // Both will indicate whether it was a return value or a buffer state check that failed.
-  assert.deepEqual(actual, expected, 'ring buffer passed test')
+  assert.deepEqual(actual, expected)
 })
 ```
 
