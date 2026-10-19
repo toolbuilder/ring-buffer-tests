@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "dequal": "^2.0.2",
-    "iterablefu": "^0.4.5"
+    "iterablefu": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
