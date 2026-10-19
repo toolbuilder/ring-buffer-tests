@@ -1,6 +1,6 @@
 {
   "name": "@toolbuilder/ring-buffer-tests",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "description": "Simple test harness for testing ring buffer implementations.",
   "keywords": [
     "ring buffer",

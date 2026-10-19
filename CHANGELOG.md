@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## v1.0.0
+
+[compare changes](https://github.com/toolbuilder/ring-buffer-tests/compare/v0.1.4...v1.0.0)
+
+### 💅 Refactors
+
+- ⚠️  Modernize to pure ESM, migrate to node:test, and prune devDependencies ([870b2e4](https://github.com/toolbuilder/ring-buffer-tests/commit/870b2e4))
+
+### 🏡 Chore
+
+- Upgrade to latest iterablefu ([215d1f8](https://github.com/toolbuilder/ring-buffer-tests/commit/215d1f8))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Modernize to pure ESM, migrate to node:test, and prune devDependencies ([870b2e4](https://github.com/toolbuilder/ring-buffer-tests/commit/870b2e4))
+
+### ❤️ Contributors
+
+- Toolbuilder <k_d_hudson@yahoo.com>
+
 ## [0.1.4](https://github.com/toolbuilder/ring-buffer-tests/compare/v0.1.3...v0.1.4) (2024-11-08)
 
 ### [0.1.3](https://github.com/toolbuilder/ring-buffer-tests/compare/v0.1.2...v0.1.3) (2021-07-23)
